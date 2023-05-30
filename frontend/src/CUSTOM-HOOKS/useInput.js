@@ -30,7 +30,7 @@ const useInput=(validate , initialState)=>
          setValue("");
       }
 
-      return {value , isValid , valueChangeHandler , isValid , clear};
+      return {value , isValid , valueChangeHandler , clear};
 };
 
 export default useInput;
