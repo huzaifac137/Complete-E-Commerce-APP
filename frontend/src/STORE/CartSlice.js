@@ -35,6 +35,11 @@ const cartSlice = createSlice({
         
                 state.totalPayment  = total;
 
+            } ,
+
+            resetStatus: (state,action)=>{
+                state.Status="idle";
+                state.response="";
             }
     } , 
 
@@ -88,7 +93,7 @@ const cartSlice = createSlice({
 
 }) ;
 
-export const{setTotalPayment} = cartSlice.actions;
+export const{setTotalPayment , resetStatus} = cartSlice.actions;
 
 
 

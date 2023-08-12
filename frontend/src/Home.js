@@ -13,15 +13,11 @@ function Home(props) {
   const [showSuccess, setShowSuccess] = useState();
 
   useEffect(() => {
-    if (Status === "idle") {
-      setShowSuccess(true);
-    }
+
   }, []);
 
   return (
     <div style={{ textAlign: "center", marginTop: "60px" }}>
-      {Status === "loading" && <h2>ADDING TO CART .....</h2>}
-      {showSuccess === true && <h2> {response} </h2>}
 
       {isLoggedIn === true && token ? (
         <>

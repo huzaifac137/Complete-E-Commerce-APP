@@ -16,6 +16,7 @@ import StripeCheckoutComponent from "./PAYMENT/StripeCheckout";
 import UserProfile from "./UserProfile";
 import PaymentSuccess from "./PAYMENT/PaymentSuccess";
 import PaymentFailure from "./PAYMENT/PaymentFailure";
+import DetailsCard from "./DetailCard/DetailsCard";
 
 
 
@@ -54,6 +55,7 @@ function App() {
       {Status2==="loading" ? <h1 style={{textAlign:"center"}}> LAODING....... </h1> : 
       <Routes>
 
+      {(isLoggedIn && token) && <Route path="/product/:productId" element={<DetailsCard/>} /> }
        <Route path="/" element={ <Home />} /> 
       {(isLoggedIn && token) &&  <Route path="/cart" element={<Cart />} /> }
 

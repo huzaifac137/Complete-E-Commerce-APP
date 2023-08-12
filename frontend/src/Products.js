@@ -12,7 +12,7 @@ function Products(props) {
   }, []);
 
   if (Status === AllStatuses.LOADING) {
-    return <h2>LOADING.......</h2>;
+    return <p>LOADING.......</p>;
   }
 
   return (
@@ -26,17 +26,17 @@ function Products(props) {
                 id={item.id}
                 title={item.title}
                 price={item.price}
-                description={"empty"}
+                description={item.description}
                 category={"empty"}
                 image={item.image}
               />
             ))
           ) : (
-            <h2 style={{ marginLeft: "530px" }}>No Items uploaded by admin!</h2>
+            <p style={{ marginLeft: "530px" }}>No Items uploaded by admin!</p>
           )}{" "}
         </>
       ) : (
-        <h2 style={{ textAlign: "center" }}>ERROR FETCHING DATA</h2>
+        <p style={{ textAlign: "center" }}>ERROR FETCHING DATA</p>
       )}
     </div>
   );

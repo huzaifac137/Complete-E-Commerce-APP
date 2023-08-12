@@ -42,8 +42,8 @@ function Cart() {
       )}
 
       {Status3 === "loading" && <h2>REOMOVING FROM CART......</h2>}
-      {Status3 === "idle" && <h2>{responseMessage3}</h2>}
-      {Status3 === "error" && <h2>{responseMessage3}</h2>}
+      {Status3 === "idle" && <h4>{responseMessage3}</h4>}
+      {Status3 === "error" && <h4>{responseMessage3}</h4>}
 
       {cartArray.map((item) => (
         <div className="cart" key={item.id}>

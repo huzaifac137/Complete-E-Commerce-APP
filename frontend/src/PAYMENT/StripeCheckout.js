@@ -1,5 +1,5 @@
 import { useStripe } from "@stripe/react-stripe-js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import useInput from "../CUSTOM-HOOKS/useInput";
@@ -20,6 +20,13 @@ function StripeCheckoutComponent(props) {
 
   const dispatch = useDispatch();
   dispatch(setTotalPayment());
+
+  useEffect(()=>{
+    if(cartArray.length===0)
+    {
+      navigate("/cart");
+    }
+  },[]);
 
   //STRIPE
   const stripe = useStripe();
@@ -91,18 +98,17 @@ function StripeCheckoutComponent(props) {
             <span style={{ color: "green" }}> ${totalPayment} </span>{" "}
           </h3>
 
-          <form onSubmit={handleCheckoutApiForm}>
-            <div>
+          
               <input
                 type="text"
                 value={EMAIL}
                 placeholder="EMAIL"
                 onChange={emailChangehandler}
               />
-            </div>
+            
 
-            <button className="btn-danger"> CHECKOUT </button>
-          </form>
+            <button className="btn-danger" onClick={handleCheckoutApiForm}> CHECKOUT </button>
+         
         </>
       )}
     </div>

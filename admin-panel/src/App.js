@@ -4,8 +4,12 @@ import "./App.css";
 function App() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
+  const[description ,setDescription] =useState("");
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
+
+  const[isLoading ,setIsLoading] = useState(false);
+  const[responseMsg ,setResponseMsg] =useState("");
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -14,6 +18,10 @@ function App() {
   const handlePrice = (e) => {
     setPrice(e.target.value);
   };
+
+  const handleDescription=(e)=>{
+    setDescription(e.target.value);
+  }
 
   const handleFile = (e) => {
     setFile(e.target.files[0]);
@@ -36,8 +44,10 @@ function App() {
     const formDataa = new FormData();
     formDataa.append("title", title);
     formDataa.append("price", price);
+    formDataa.append("description" , description);
     formDataa.append("file", file);
     try {
+      setIsLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_SERVER_URL}api/products/admin/postkrdead`,
         {
@@ -52,10 +62,11 @@ function App() {
       if (response.status !== 201) {
         throw new Error(responseData.message);
       }
-
-      console.log(responseData.message);
+         setIsLoading(false);
+      setResponseMsg(responseData.message);
     } catch (error) {
-      console.log(error.message);
+      setResponseMsg(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -67,6 +78,10 @@ function App() {
 
       <h3>UPLOAD A PRODUCT</h3>
 
+{isLoading? <p>Adding new product...</p> : null}
+{
+  responseMsg!=="" ? <p>{responseMsg}</p> : null
+}
       <input
         type="text"
         placeholder="title"
@@ -79,6 +94,13 @@ function App() {
         value={price}
         onChange={handlePrice}
       />
+        <input
+        type="text"
+        placeholder="description"
+        value={description}
+        onChange={handleDescription}
+      />
+
       <input
         type="file"
         placeholder="upload an image"
